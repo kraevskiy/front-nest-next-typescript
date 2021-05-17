@@ -39,16 +39,17 @@
 
 	margin-left: 10px;
 }
-.arrow svg {
-	transition: all .4s;
 
+.arrow svg {
+	transition: all 0.4s;
 }
+
 .down {
+	transition: all 0.4s;
 	transform: rotate(90deg);
-	transition: all .4s;
 }
 
 .primary svg,
-.ghost:hover svg{
+.ghost:hover svg {
 	fill: var(--white);
 }
