@@ -10,6 +10,7 @@
     "stylelint": "stylelint \"**/*.css\" --fix"
   },
   "dependencies": {
+    "date-fns": "^2.21.3",
     "eslint-plugin-react-hooks": "^4.2.0",
     "next": "10.2.0",
     "react": "17.0.2",
