@@ -5,7 +5,7 @@
 	padding: 10px;
 
 	cursor: pointer;
-	transition: all 0.7s;
+	transition: all 0.4s;
 	text-align: center;
 
 	border: none;
@@ -32,4 +32,23 @@
 .ghost:hover {
 	color: var(--white);
 	background-color: var(--primary);
+}
+
+.arrow {
+	display: inline-block;
+
+	margin-left: 10px;
+}
+.arrow svg {
+	transition: all .4s;
+
+}
+.down {
+	transform: rotate(90deg);
+	transition: all .4s;
+}
+
+.primary svg,
+.ghost:hover svg{
+	fill: var(--white);
 }
