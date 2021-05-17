@@ -1,6 +1,9 @@
-import {Htag, Button, P, Tag} from "../components";
+import {Htag, Button, P, Tag, Rating} from "../components";
+import {useState} from "react";
 
 export default function Home(): JSX.Element {
+  const [rat, setRat] = useState<number>(4);
+
   return (
     <div>
       <Htag tag="h1">Text h1</Htag>
@@ -9,16 +12,16 @@ export default function Home(): JSX.Element {
       <Button appearance="primary" arrow="right">sdfsdfsdf</Button>
       <Button appearance="ghost" arrow="right">sdfsdfsdf</Button>
       <P>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis repellat ut? Animi, eaque tempora?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis
       </P>
       <P size="m">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis repellat ut? Animi, eaque tempora?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis
       </P>
       <P size="s">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis repellat ut? Animi, eaque tempora?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis
       </P>
       <P size="l">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis repellat ut? Animi, eaque tempora?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est et explicabo, incidunt itaque officiis
       </P>
       <Tag size="s">Goast</Tag>
       <Tag size="m" color="red">red</Tag>
@@ -28,6 +31,7 @@ export default function Home(): JSX.Element {
       <Tag color="primary">primary</Tag>
       <Tag size="m" color="primary">primary</Tag>
       <Tag color="grey">primary</Tag>
+      <Rating rating={rat} isEditable setRating={setRat}/>
     </div>
   );
 }
