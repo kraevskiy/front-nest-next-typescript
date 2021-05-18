@@ -10,9 +10,6 @@ function Home({menu, firstCategory}: HomeProps): JSX.Element {
 
   return (
     <>
-      <ul>
-        {menu.map(m =>(<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
-      </ul>
       <Htag tag="h1">Text h1</Htag>
       <Htag tag="h2">Text h1</Htag>
       <Htag tag="h3">Text h1</Htag>
