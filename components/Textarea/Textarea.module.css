@@ -1,7 +1,10 @@
+.wrapper {
+	position: relative;
+}
+
 .textarea {
 	padding: 7px 15px;
-
-	resize: none;
+	width: 100%;
 
 	color: var(--black);
 	border: none;
@@ -18,3 +21,16 @@
 .textarea ::placeholder {
 	color: var(--grey);
 }
+
+
+.error{
+	border: 1px solid var(--red);
+}
+
+.errorMessage {
+	position: absolute;
+	bottom: -15px;
+	left: 0;
+	color: var(--red);
+}
+

@@ -5,6 +5,8 @@ import {Footer} from "./Footer/Footer";
 import {FunctionComponent} from "react";
 import styles from './Layout.module.css';
 import {AppContextProvider, IAppContext} from "../../context/app.context";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Layout({children}: LayoutProps): JSX.Element {
 
@@ -26,6 +28,7 @@ export const withLayout = <T extends Record<string, unknown> & IAppContext>(Comp
     return (
       <AppContextProvider menu={props.menu} firstCategory={props.firstCategory}>
         <Layout>
+          <ToastContainer />
           <Component {...props}/>
         </Layout>
       </AppContextProvider>
