@@ -5,15 +5,40 @@ import {useRouter} from "next/router";
 import {FirstLevelMenuItem, PageItem} from "../../../interfaces/menu.interface";
 import {AppContext} from "../../../context/app.context";
 import styles from './Menu.module.css';
-import { firstLevelMenu } from "../../../helpers/helpers";
+import {firstLevelMenu} from "../../../helpers/helpers";
+import {motion} from "framer-motion";
 
 export function Menu(): JSX.Element {
   const {menu, setMenu, firstCategory} = useContext(AppContext);
   const router = useRouter();
 
+  const variants = {
+    visible: {
+      marginBottom: 20,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    },
+    hidden: {marginBottom: 0}
+  };
+
+  const variantsChildren = {
+    visible: {
+      opacity: 1,
+      maxHeight: 40,
+      x: 0
+    },
+    hidden: {
+      opacity: 0,
+      maxHeight: 0,
+      x: 100
+    }
+  };
+
   const handleOpenSecondLevel = (secondCategory: string) => {
     setMenu && setMenu(menu.map(m => {
-      if(m._id.secondCategory === secondCategory){
+      if (m._id.secondCategory === secondCategory) {
         m.isOpened = !m.isOpened;
       }
       return m;
@@ -48,19 +73,22 @@ export function Menu(): JSX.Element {
     return (
       <div className={styles.secondBlock}>
         {menu.map(m => {
-          if(m.pages.map(p=> p.alias).includes(router.asPath.split("/")[2])){
+          if (m.pages.map(p => p.alias).includes(router.asPath.split("/")[2])) {
             m.isOpened = true;
           }
           return (
             <div key={m._id.secondCategory}>
-              <div className={styles.secondLevel} onClick={()=> handleOpenSecondLevel(m._id.secondCategory)}>
+              <div className={styles.secondLevel} onClick={() => handleOpenSecondLevel(m._id.secondCategory)}>
                 {m._id.secondCategory}
               </div>
-              <div className={cn(styles.secondLevelBlock, {
-                [styles.secondLevelBlockOpened]: m.isOpened
-              })}>
+              <motion.div
+                layout
+                variants={variants}
+                initial={m.isOpened ? 'visible' : 'hidden'}
+                animate={m.isOpened ? 'visible' : 'hidden'}
+                className={cn(styles.secondLevelBlock)}>
                 {buildThirdLevel(m.pages, menuItem.route)}
-              </div>
+              </motion.div>
             </div>
           );
         })}
@@ -71,13 +99,15 @@ export function Menu(): JSX.Element {
   const buildThirdLevel = (pages: PageItem[], route: string) => {
     return (
       pages.map(p => (
-        <Link key={p.alias} href={`/${route}/${p.alias}`}>
-          <a className={cn(styles.thirdLevel, {
-            [styles.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath
-          })}>
-            - {p.category}
-          </a>
-        </Link>
+        <motion.div key={p.alias} variants={variantsChildren}>
+          <Link href={`/${route}/${p.alias}`}>
+            <a className={cn(styles.thirdLevel, {
+              [styles.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath
+            })}>
+              - {p.category}
+            </a>
+          </Link>
+        </motion.div>
       ))
     );
   };

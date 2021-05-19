@@ -8,11 +8,12 @@ import {Button} from "../Button/Button";
 import {declOfNum, priceUa} from "../../helpers/helpers";
 import {Divider} from "../Divider/Divider";
 import Image from "next/image";
-import {useRef, useState} from "react";
+import {ForwardedRef, forwardRef, useRef, useState} from "react";
 import {Review} from "../Review/Review";
 import {ReviewForm} from "../ReviewForm/ReviewForm";
+import { motion } from "framer-motion";
 
-export function Product({product, className, ...props}: ProductProps): JSX.Element {
+export const Product = motion(forwardRef(({product, className, ...props}: ProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
   const reviewRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +26,7 @@ export function Product({product, className, ...props}: ProductProps): JSX.Eleme
   };
 
   return (
-    <div className={className} {...props}>
+    <div className={className} {...props} ref={ref}>
       <Card className={styles.product}>
         <div className={styles.logo}>
           <Image
@@ -50,7 +51,9 @@ export function Product({product, className, ...props}: ProductProps): JSX.Eleme
         <div className={styles.priceTitle}>Цена</div>
         <div className={styles.creditTitle}>кредит</div>
         <div
-          className={styles.rateTitle}><a href="#ref" onClick={handleScrollToReview}>{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}</a></div>
+          className={styles.rateTitle}><a href="#ref"
+                                          onClick={handleScrollToReview}>{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}</a>
+        </div>
         <Divider className={styles.hr}/>
         <div className={styles.description}>{product.description}</div>
         <div className={styles.feature}>
@@ -82,7 +85,7 @@ export function Product({product, className, ...props}: ProductProps): JSX.Eleme
           <Button
             appearance="ghost"
             arrow={isReviewOpen ? 'down' : 'right'}
-            onClick={()=> setIsReviewOpen(!isReviewOpen)}
+            onClick={() => setIsReviewOpen(!isReviewOpen)}
           >Читать отзывы</Button>
         </div>
       </Card>
@@ -92,7 +95,7 @@ export function Product({product, className, ...props}: ProductProps): JSX.Eleme
       })} ref={reviewRef}>
         {product.reviews.map(r => (
           <div key={r._id}>
-            <Review review={r} />
+            <Review review={r}/>
             <Divider/>
           </div>
         ))}
@@ -100,4 +103,4 @@ export function Product({product, className, ...props}: ProductProps): JSX.Eleme
       </Card>
     </div>
   );
-}
+}));
