@@ -53,7 +53,7 @@ export function Menu(): JSX.Element {
           }
           return (
             <div key={m._id.secondCategory}>
-              <div className={styles.secondLevel} onClick={()=> handleOpenSecondLevel(m._id.secondCategory)}>
+              <div tabIndex={0} className={styles.secondLevel} onClick={()=> handleOpenSecondLevel(m._id.secondCategory)}>
                 {m._id.secondCategory}
               </div>
               <div className={cn(styles.secondLevelBlock, {
