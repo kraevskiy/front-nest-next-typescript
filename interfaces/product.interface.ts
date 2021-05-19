@@ -22,6 +22,7 @@ export interface ProductModel {
   price: number;
   oldPrice: number;
   credit: number;
+  initialRating: number;
   description: string;
   advantages: string;
   disAdvantages: string;

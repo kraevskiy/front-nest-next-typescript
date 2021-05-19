@@ -6,17 +6,18 @@ import {TopLevelCategory, TopPageModel} from "../../interfaces/page.interface";
 import {ParsedUrlQuery} from "querystring";
 import {ProductModel} from "../../interfaces/product.interface";
 import {firstLevelMenu} from "../../helpers/helpers";
+import {TopPageComponent} from "../../page-components";
 
-function Course({menu, page, products}: CourseProps): JSX.Element {
-  return (
-    <>
-      {products && products.length}
-    </>
-  );
+function TopPage({menu, page, products, firstCategory}: TopPagePropsType): JSX.Element {
+  return <TopPageComponent
+    firstCategory={firstCategory}
+    page={page}
+    products={products}
+  />;
 }
 
 
-export default withLayout(Course);
+export default withLayout(TopPage);
 
 // генерируем все пути страниц
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -36,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 // получаем данные с сервера
-export const getStaticProps: GetStaticProps<CourseProps> = async ({params}: GetStaticPropsContext<ParsedUrlQuery>) => {
+export const getStaticProps: GetStaticProps<TopPagePropsType> = async ({params}: GetStaticPropsContext<ParsedUrlQuery>) => {
   // вовращаем 404 если алиас не найден
   if (!params) {
     return {
@@ -57,7 +58,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({params}: GetS
       firstCategory: firstCategoryItem.id
     });
 
-    if(menu.length == 0) {
+    if (menu.length == 0) {
       return {
         notFound: true
       };
@@ -88,7 +89,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({params}: GetS
 };
 
 // описание входящих параметров
-interface CourseProps extends Record<string, unknown> {
+interface TopPagePropsType extends Record<string, unknown> {
   menu: MenuItem[];
   firstCategory: TopLevelCategory;
   page: TopPageModel;
