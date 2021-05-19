@@ -10,6 +10,7 @@ import {Divider} from "../Divider/Divider";
 import Image from "next/image";
 import {useState} from "react";
 import {Review} from "../Review/Review";
+import {ReviewForm} from "../ReviewForm/ReviewForm";
 
 export function Product({product, ...props}: ProductProps): JSX.Element {
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
@@ -82,8 +83,12 @@ export function Product({product, ...props}: ProductProps): JSX.Element {
         [styles.closed]: !isReviewOpen
       })}>
         {product.reviews.map(r => (
-          <Review review={r} key={r._id}/>
+          <div key={r._id}>
+            <Review review={r} />
+            <Divider/>
+          </div>
         ))}
+        <ReviewForm productId={product._id}/>
       </Card>
     </>
   );
