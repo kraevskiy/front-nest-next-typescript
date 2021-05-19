@@ -24,8 +24,8 @@ export interface ProductModel {
   credit: number;
   initialRating: number;
   description: string;
-  advantages: string;
-  disAdvantages: string;
+  advantages?: string;
+  disAdvantages?: string;
   characteristics: ProductCharacteristic[];
   createdAt: Date;
   updatedAt: Date;
