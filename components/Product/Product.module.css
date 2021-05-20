@@ -49,6 +49,7 @@
 
 .advBlock {
 	grid-column: middle / end;
+
 	font-size: 16px;
 	line-height: 22px;
 }
@@ -108,7 +109,6 @@
 .actions button:last-child {
 	margin-left: 20px;
 }
-
 
 .advTitle {
 	margin-bottom: 5px;
