@@ -5,14 +5,10 @@ import {MenuItem} from "../../interfaces/menu.interface";
 import {firstLevelMenu} from "../../helpers/helpers";
 import {ParsedUrlQuery} from "querystring";
 import {API} from "../../helpers/api";
+import TopCategoryComponent from "../../page-components/TopCategoryComponent/TopCategoryComponent";
 
-function Type({firstCategory}: TypeProps): JSX.Element {
-
-  return (
-    <>
-      type {firstCategory}
-    </>
-  );
+function Type({firstCategory, menu: pages}: TypeProps): JSX.Element {
+  return <TopCategoryComponent firstCategory={firstCategory} pages={pages}/>;
 }
 
 
