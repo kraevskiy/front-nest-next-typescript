@@ -6,7 +6,6 @@ import styles from "./TopCategoryComponent.module.css";
 
 const TopCategoryComponent = ({firstCategory, pages}:TopCategoryComponentProps):JSX.Element => {
   const categoryType = firstLevelMenu[firstCategory];
-  console.log(pages);
 
   if(!pages.length) {
     return (

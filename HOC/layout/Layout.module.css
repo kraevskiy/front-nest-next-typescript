@@ -17,6 +17,7 @@
 
 .body {
 	grid-area: body;
+	outline: none;
 }
 
 .footer {
@@ -39,10 +40,6 @@
 
 .displayed {
 	height: auto;
-}
-
-.body {
-	outline: none;
 }
 
 @media (max-width: 765px) {

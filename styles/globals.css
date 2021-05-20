@@ -62,12 +62,8 @@ hr {
 }
 
 pre {
-	font-family: monospace, monospace; /* 1 */
+	font-family: monospace; /* 1 */
 	font-size: 1em; /* 2 */
-}
-
-a {
-	background-color: transparent;
 }
 
 blockquote {
@@ -89,7 +85,7 @@ strong {
 code,
 kbd,
 samp {
-	font-family: monospace, monospace; /* 1 */
+	font-family: monospace; /* 1 */
 	font-size: 1em; /* 2 */
 }
 
@@ -207,12 +203,6 @@ textarea {
 
 [type="search"]::-webkit-search-decoration {
 	-webkit-appearance: none;
-}
-
-::-webkit-file-upload-button {
-	-webkit-appearance: button; /* 1 */
-
-	font: inherit; /* 2 */
 }
 
 details {
