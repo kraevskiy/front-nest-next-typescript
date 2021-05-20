@@ -1,0 +1,109 @@
+.wrapper {
+	position: fixed;
+	z-index: 13;
+	top: 0;
+	left: 0;
+
+	display: grid;
+	align-self: center;
+
+	width: 100vw;
+	height: 100vh;
+
+	background: rgba(255, 255, 255, 0.4);
+	grid-template-columns: auto 100px auto;
+	grid-template-rows: auto 60px auto;
+	grid-template-areas:
+		". loader ."
+		". . .";
+}
+
+.loader {
+	position: relative;
+
+	display: block;
+
+	width: 100px;
+	height: 60px;
+
+	vertical-align: middle;
+
+	border-radius: 50%;
+	grid-area: loader;
+}
+
+.times1 {
+	left: 0;
+
+	animation: times-pulse 1s ease-in-out infinite;
+}
+
+.times2 {
+	left: 25px;
+
+	animation: times-pulse 1s 0.2s ease-in-out infinite;
+}
+
+.times3 {
+	left: 50px;
+
+	animation: times-pulse 1s 0.4s ease-in-out infinite;
+}
+
+.cssTimes {
+	position: absolute;
+
+	width: 100px;
+	height: 90px;
+}
+
+.cssTimes::before,
+.cssTimes::after {
+	position: absolute;
+	top: 0;
+	left: 50px;
+
+	width: 2px;
+	height: 65px;
+
+	content: "";
+	transform: rotate(-45deg);
+	transform-origin: 0 100%;
+	animation: times-background 1s ease-in-out infinite;
+
+	border-radius: 50px 50px 0 0;
+	background: red;
+}
+
+@keyframes times-background {
+	0%,
+	100% {
+		background: var(--primary);
+	}
+
+	60% {
+		background: var(--red);
+	}
+}
+
+.cssTimes::after {
+	left: 0;
+
+	transform: rotate(45deg);
+	transform-origin: 100% 100%;
+}
+
+@keyframes times-pulse {
+	0%,
+	100% {
+		transform: scale(1);
+
+		opacity: 1;
+	}
+
+	60% {
+		transform: scale(0);
+
+		opacity: 0;
+	}
+}

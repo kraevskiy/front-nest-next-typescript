@@ -11,9 +11,10 @@ import axios from "axios";
 import {API} from "../../helpers/api";
 import {useState} from "react";
 import {toast} from "react-toastify";
+import CloseIcon from "./close.svg";
 
-export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): JSX.Element => {
-  const {register, control, handleSubmit, formState: {errors}, reset} = useForm<IReviewForm>();
+export const ReviewForm = ({productId, className, isOpened, ...props}: ReviewFormProps): JSX.Element => {
+  const {register, control, handleSubmit, formState: {errors}, reset, clearErrors} = useForm<IReviewForm>();
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
@@ -21,15 +22,16 @@ export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): J
     try {
       const {data} = await axios.post<AReviewSentResponse>(API.review.createDemo, {...formData, productId});
       if (data.message) {
-        // setIsSuccess(true);
-        toast.success(<div>🙏 Спасибо <br/> 👍 Ваш отзыв отправлен. <br/> ✍Отзыв будет опубликован после проверки</div>);
+        setIsSuccess(true);
+        toast.success(<div>🙏 Спасибо <br/> 👍 Ваш отзыв отправлен. <br/> ✍Отзыв будет опубликован после проверки
+        </div>);
         reset();
       } else {
-        // setError('😔 Что-то пошло не так');
+        setError('😔 Что-то пошло не так');
         toast.error('😔 Что-то пошло не так');
       }
     } catch (err) {
-      // setError(err.message);
+      setError(err.message);
       toast.error('😔 Что-то пошло не так');
     }
   };
@@ -44,14 +46,20 @@ export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): J
           <Input
             {...register('name', {required: {value: true, message: 'Заполните имя'}})}
             error={errors.name}
-            placeholder="Имя"/>
+            placeholder="Имя"
+            tabIndex={isOpened ? 0 : -1}
+            aria-invalid={!!errors.name}
+          />
         </div>
         <div>
           <Input
             {...register('title', {required: {value: true, message: 'Заполните заголовок'}})}
             error={errors.title}
             placeholder="Заголовок отзыва"
-            className={styles.title}/>
+            className={styles.title}
+            tabIndex={isOpened ? 0 : -1}
+            aria-invalid={!!errors.title}
+          />
         </div>
         <div className={styles.rating}>
           <span>Оценка:</span>
@@ -65,7 +73,9 @@ export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): J
                 error={errors.rating}
                 rating={field.value}
                 ref={field.ref}
-                setRating={field.onChange}/>
+                setRating={field.onChange}
+                tabIndex={isOpened ? 0 : -1}
+              />
             )}
           />
         </div>
@@ -73,12 +83,37 @@ export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): J
           {...register('description', {required: {value: true, message: 'Заполните описание'}})}
           error={errors.description}
           placeholder="Текст отзыва"
-          className={styles.description}/>
+          className={styles.description}
+          tabIndex={isOpened ? 0 : -1}
+          aria-label={'текст отзыва'}
+          aria-invalid={!!errors.description}
+        />
         <div className={styles.submit}>
-          <Button appearance="primary">Отправить</Button>
+          <Button appearance="primary" tabIndex={isOpened ? 0 : -1} onClick={() => clearErrors()}>Отправить</Button>
           <span className={styles.info}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
         </div>
       </div>
+      {isSuccess && <div className={cn(styles.success, styles.panel)} role="alert">
+        <div className={styles.successTitle}>Ваш отзыв отправлен</div>
+        <div>Спасибо, ваш отзыв будет опубликован после проверки.</div>
+        <button
+          className={styles.close}
+          onClick={() => setIsSuccess(false)}
+          aria-label="Закрыть оповещение"
+        >
+          <CloseIcon/>
+        </button>
+      </div>}
+      {error && <div className={cn(styles.error, styles.panel)} role="alert">
+        Что-то пошло не так, попробуйте обновить страницу
+        <button
+          className={styles.close}
+          onClick={() => setError('')}
+          aria-label="Закрыть оповещение"
+        >
+          <CloseIcon/>
+        </button>
+      </div>}
     </form>
   );
 };
