@@ -11,12 +11,6 @@
 		"footer footer footer footer";
 }
 
-.header {
-	grid-area: header;
-
-	display: none;
-}
-
 .sidebar {
 	grid-area: sidebar;
 }
@@ -36,11 +30,9 @@
 			"header"
 			"body"
 			"footer";
+		gap: 10px;
 	}
 
-	.header {
-		display: block;
-	}
 
 	.body {
 		padding: 0 15px;

@@ -153,17 +153,9 @@
 	border-bottom: 1px dashed var(--grey-light);
 }
 
-.closed {
+.reviews {
 	overflow: hidden;
 
-	max-height: 0;
-	padding: 0;
-}
-
-.opened {
-	overflow: hidden;
-
-	max-height: auto;
 	padding: 30px;
 }
 

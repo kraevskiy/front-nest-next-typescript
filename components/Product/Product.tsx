@@ -11,11 +11,20 @@ import Image from "next/image";
 import {ForwardedRef, forwardRef, useRef, useState} from "react";
 import {Review} from "../Review/Review";
 import {ReviewForm} from "../ReviewForm/ReviewForm";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 
-export const Product = motion(forwardRef(({product, className, ...props}: ProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const Product = motion(forwardRef(({
+                                            product,
+                                            className,
+                                            ...props
+                                          }: ProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
   const [isReviewOpen, setIsReviewOpen] = useState<boolean>(false);
   const reviewRef = useRef<HTMLDivElement>(null);
+
+  const variants = {
+    visible: {opacity: 1, height: 'auto'},
+    hidden: {opacity: 0, height: 0}
+  };
 
   const handleScrollToReview = () => {
     setIsReviewOpen(true);
@@ -89,18 +98,21 @@ export const Product = motion(forwardRef(({product, className, ...props}: Produc
           >Читать отзывы</Button>
         </div>
       </Card>
-      <Card color="blue" className={cn(styles.reviews, {
-        [styles.opened]: isReviewOpen,
-        [styles.closed]: !isReviewOpen
-      })} ref={reviewRef}>
-        {product.reviews.map(r => (
-          <div key={r._id}>
-            <Review review={r}/>
-            <Divider/>
-          </div>
-        ))}
-        <ReviewForm productId={product._id}/>
-      </Card>
+      <motion.div
+        variants={variants}
+        initial={'hidden'}
+        animate={isReviewOpen ? 'visible' : 'hidden'}
+      >
+        <Card color="blue" className={cn(styles.reviews)} ref={reviewRef}>
+          {product.reviews.map(r => (
+            <div key={r._id}>
+              <Review review={r}/>
+              <Divider/>
+            </div>
+          ))}
+          <ReviewForm productId={product._id}/>
+        </Card>
+      </motion.div>
     </div>
   );
 }));

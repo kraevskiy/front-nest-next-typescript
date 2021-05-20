@@ -1,4 +1,4 @@
-.inputWrapper{
+.inputWrapper {
 	position: relative;
 }
 
@@ -22,7 +22,7 @@
 	color: var(--grey);
 }
 
-.error{
+.error {
 	border: 1px solid var(--red);
 }
 
@@ -30,5 +30,6 @@
 	position: absolute;
 	bottom: -20px;
 	left: 0;
+
 	color: var(--red);
 }

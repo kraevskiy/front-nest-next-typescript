@@ -7,6 +7,7 @@ import styles from './Layout.module.css';
 import {AppContextProvider, IAppContext} from "../../context/app.context";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {Up} from "../../components";
 
 function Layout({children}: LayoutProps): JSX.Element {
 
@@ -18,6 +19,8 @@ function Layout({children}: LayoutProps): JSX.Element {
         {children}
       </div>
       <Footer className={styles.footer}/>
+      <Up/>
+      <ToastContainer />
     </div>
   );
 }
@@ -28,7 +31,6 @@ export const withLayout = <T extends Record<string, unknown> & IAppContext>(Comp
     return (
       <AppContextProvider menu={props.menu} firstCategory={props.firstCategory}>
         <Layout>
-          <ToastContainer />
           <Component {...props}/>
         </Layout>
       </AppContextProvider>
