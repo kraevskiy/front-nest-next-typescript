@@ -14,7 +14,7 @@
 }
 
 .primary svg * {
-  fill: var(--white);
+	fill: var(--white);
 }
 
 .primary:hover {
@@ -22,17 +22,17 @@
 }
 
 .white {
-  background-color: var(--white);
+	background-color: var(--white);
 }
 
 .white svg * {
-  fill: var(--primary);
+	fill: var(--primary);
 }
 
 .white:hover {
-  background-color: var(--primary);
+	background-color: var(--primary);
 }
 
 .white:hover svg * {
-  fill: var(--white);
+	fill: var(--white);
 }
