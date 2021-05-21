@@ -1,0 +1,19 @@
+name: Publish Docker
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Publish to Repository
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          registry: docker.pkg.github.com
+          name: docker.pkg.github.com/kraevskiy/front-nest-next-typescript/front-nest-next-typescript
+          username: ${{ secret.DOCKER_USERNAME }}
+          password: ${{ secret.DOCKER_PASSWORD }}
+          tags: "develop"
