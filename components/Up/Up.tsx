@@ -24,7 +24,7 @@ export const Up = (): JSX.Element => {
       animate={controls}
       initial={{opacity: 0}}
       className={styles.up}>
-      <ButtonIcon onClick={handleClick} appearance="primary" icon="up"/>
+      <ButtonIcon aria-label="Наверх" onClick={handleClick} appearance="primary" icon="up"/>
     </motion.div>
   );
 };

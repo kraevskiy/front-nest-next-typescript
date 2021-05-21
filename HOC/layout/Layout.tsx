@@ -45,7 +45,7 @@ function Layout({children}: LayoutProps): JSX.Element {
     <div className={styles.wrapper}>
       {loading && <Loader/>}
       <a
-        tabIndex={1}
+        tabIndex={0}
         onFocus={() => setIsSkipLinkDisplayed(true)}
         onKeyDown={skipContentAction}
         className={cn(styles.skipLink, {
