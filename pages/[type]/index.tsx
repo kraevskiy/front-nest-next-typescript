@@ -8,7 +8,9 @@ import {API} from "../../helpers/api";
 import TopCategoryComponent from "../../page-components/TopCategoryComponent/TopCategoryComponent";
 
 function Type({firstCategory, menu: pages}: TypeProps): JSX.Element {
-  return <TopCategoryComponent firstCategory={firstCategory} pages={pages}/>;
+  return <>
+    {firstCategory && pages && <TopCategoryComponent firstCategory={firstCategory} pages={pages}/>}
+  </>;
 }
 
 
@@ -17,7 +19,7 @@ export default withLayout(Type);
 // генерируем все пути страниц
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: firstLevelMenu.map(m => '/'+ m.route),
+    paths: firstLevelMenu.map(m => '/' + m.route),
     fallback: true
   };
 };
